@@ -292,6 +292,10 @@
         {
           "component": "libtiff",
           "features": []
+        },
+        {
+          "component": "xmp_toolkit_sdk",
+          "features": []
         }
       ]
     },
