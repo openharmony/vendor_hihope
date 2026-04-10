@@ -375,7 +375,8 @@
           ]
         },
         {
-          "component": "api_metrics"
+          "component": "api_metrics",
+          "features": []
         }
       ]
     },
