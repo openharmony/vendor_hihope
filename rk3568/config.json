@@ -373,6 +373,10 @@
             "hiview_enable_leak_detector = true",
             "hiview_enable_performance_monitor = true"
           ]
+        },
+        {
+          "component": "api_metrics",
+          "features": []
         }
       ]
     },
