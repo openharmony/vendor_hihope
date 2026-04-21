@@ -1,0 +1,18 @@
+{
+  "parts": {
+    "product_rk3568_plus": {
+      "module_list": [
+        "//vendor/hihope/rk3568_plus/default_app_config:default_app_config",
+        "//vendor/hihope/rk3568_plus/image_conf:custom_image_conf",
+        "//vendor/hihope/rk3568_plus/preinstall-config:preinstall-config",
+        "//vendor/hihope/rk3568_plus/resourceschedule:resourceschedule",
+        "//vendor/hihope/rk3568_plus/etc:product_etc_conf",
+        "//vendor/hihope/rk3568_plus/hals/audio:hdf_audio_config",
+        "//vendor/hihope/rk3568_plus/hals/codec/:hdf_codec_config",
+        "//vendor/hihope/rk3568_plus/hdf_config/uhdf:hdf_config",
+        "//vendor/hihope/rk3568_plus/window_config:window_config"
+      ]
+    }
+  },
+  "subsystem": "product_hihope"
+}
