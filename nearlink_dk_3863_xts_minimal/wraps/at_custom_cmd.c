@@ -16,6 +16,10 @@
 #include "at.h"
 #include "osal_debug.h"
 
+#if CONFIG_BSS_RESERVATION_SIZE > 0
+uint8_t g_bssReservation[CONFIG_BSS_RESERVATION_SIZE];
+#endif
+
 // 外部声明（来自主应用）
 extern void OsDbgTskInfoGet(uint32_t task_mask);
 #define OS_ALL_TASK_MASK  0xFFFFFFFF
@@ -42,6 +46,9 @@ void print_mem_usage(const char *tag)
     LOS_MEM_POOL_STATUS status;
     LOS_MemInfoGet(m_aucSysMem0, &status);
     PRINT("[MEM Usage][%s] mem: used:%u, free:%u\r\n", tag, status.uwTotalUsedSize, status.uwTotalFreeSize);
+#if CONFIG_BSS_RESERVATION_SIZE > 0
+    PRINT("[MEM BssReservation Info] mem: size:%u, ptr:%p\r\n", CONFIG_BSS_RESERVATION_SIZE, (void *)g_bssReservation);
+#endif
 }
 
 // AT+SYSINFO 命令处理函数
