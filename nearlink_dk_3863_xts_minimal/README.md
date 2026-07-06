@@ -23,6 +23,11 @@ vendor/hihope/nearlink_dk_3863_xts_minimal/
 # 在 OpenHarmony 根目录执行
 python3 build.py --product-name nearlink_dk_3863_xts_minimal  --gn-args build_xts=true  --test xts //test/xts/acts/startup_lite/bootstrap_hal:ActsBootstrapTest,//test/xts/acts/distributed_schedule_lite/system_ability_manager_hal:ActsSamgrTest,//test/xts/acts/hiviewdfx_lite/hievent_hal:ActsHieventLiteTest,//test/xts/acts/startup_lite/syspara_hal:ActsParameterTest,//test/xts/acts/hiviewdfx_lite/hilog_hal:ActsDfxFuncTest
 ```
+### 2. 编译命令
+- 不编译oh组件，并保留占有400k内存
+```bash
+rm out -rf;hb build -p nearlink_dk_3863_xts_minimal --gn-args build_ws63_mode=no_oh bss_reservation_size=\(1024*400\)
+```
 
 ## 📡 自定义 AT 命令
 
