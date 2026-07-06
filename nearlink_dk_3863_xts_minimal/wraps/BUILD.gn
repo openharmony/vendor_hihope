@@ -11,6 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import("//foundation/systemabilitymgr/samgr_lite/config.gni")
+declare_args() {
+    bss_reservation_size = 0
+}
 static_library("product") {
     sources = [
         "stub_impl.c",
@@ -24,4 +28,19 @@ static_library("product") {
         "//device/soc/hisilicon/ws63v100/sdk/kernel/osal/include",
         "//device/soc/hisilicon/ws63v100/sdk/kernel/osal/include/debug",
     ]
+    deps =[]
+
+    # BSS reservation size configuration (default: 0 byte)
+    cflags = [ "-DCONFIG_BSS_RESERVATION_SIZE=$bss_reservation_size" ]
+
+    if (enable_ohos_systemabilitymgr_samgr_lite_broadcast == false) {
+        deps += [":broadcast"]
+    }
+}
+if (enable_ohos_systemabilitymgr_samgr_lite_broadcast == false) {
+    static_library("broadcast") {
+        sources = [
+            "broadcast_stub.c",
+        ]
+    }
 }

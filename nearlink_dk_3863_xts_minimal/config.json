@@ -17,7 +17,9 @@
             "component": "product_nearlink_dk_3863_xts_minimal",
             "features": [
               "enable_oh_device_lite_auth=false",
-              "enable_product_config_patch=true"
+              "enable_product_config_patch=true",
+              "bss_reservation_size=(1024 * 0)",
+              "build_ws63_mode=normal"
             ]
           }
         ]
@@ -58,12 +60,6 @@
       "subsystem": "commonlibrary",
       "components": [
         { "component": "utils_lite", "features":[ "utils_lite_feature_file = true" ] }
-      ]
-    },
-    {
-      "subsystem": "updater",
-      "components": [
-        { "component": "sys_installer_lite", "features":[] }
       ]
     },
     {

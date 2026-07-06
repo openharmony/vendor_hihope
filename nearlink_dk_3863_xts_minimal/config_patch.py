@@ -202,6 +202,8 @@ def patch_target(target):
         "mbedtls",  # Required for mbedtls_cipher_adapt_register_func
 
         'xo_trim_port',
+        'little_fs', 
+        'littlefs_adapt_ws63',
         'product'
     ]
 
@@ -222,8 +224,6 @@ def patch_target(target):
         "init_utils" ,       
         "begetutil", 
         "bootstrap", 
-        'little_fs', 
-        'littlefs_adapt_ws63',
         "hal_sysparam"  , 
         "param_client_lite",
         "udidcomm",
@@ -253,18 +253,22 @@ def patch_target(target):
         "module_ActsSamgrTest", 
         "hctest", 
     ]
-
     # ========== 根据环境变量动态调整配置 ==========
-    BUILD_MODE = os.environ.get('BUILD_MODE', 'normal')
+    BUILD_MODE = os.environ.get('BUILD_WS63_MODE', 'normal')
     BUILD_XTS = os.environ.get('BUILD_XTS', False)
+    BUILD_BT = False
     print("\n" + "="*60)
     print("WS63 Dynamic Configuration Applied:")
     print(f"  Build Mode:        {BUILD_MODE}")
     print(f"  Build XTS:         {BUILD_XTS}")
 
-    target["ws63-liteos-xts"]["ram_component"] += ram_component_sdk_bt_base if 0 else []
-    target["ws63-liteos-xts"]["ram_component"] += ram_component_ohos_base if 1 else []
-    target["ws63-liteos-xts"]["ram_component"] += ram_component_ohos_xts if BUILD_XTS else []
+    if BUILD_MODE == "no_oh":
+        pass
+    else:
+        target["ws63-liteos-xts"]["ram_component"] += ram_component_ohos_base
+        target["ws63-liteos-xts"]["ram_component"] += ram_component_ohos_xts if BUILD_XTS else []
+
+    target["ws63-liteos-xts"]["ram_component"] += ram_component_sdk_bt_base if BUILD_BT else []
 
     # 根据环境变量修改 Kconfig 配置
     kconfig_xts = os.path.join(os.path.dirname(__file__), 'menuconfig', 'acore', 'ws63_liteos_xts.config')
